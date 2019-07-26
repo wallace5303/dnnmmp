@@ -99,7 +99,110 @@ mongodb=4.*
 └── www                                 代码目录
 ```
 
+## 2.安装步骤
+1. 本地安装`git`、`docker`和`docker-compose`(**建议使用最新版本**)。安装方法
+2. `clone`项目：
+    ```
+    $ git clone git@github.com:wallace5303/dnnmmp.git
+    ```
+3. 如果不是`root`用户，还需将当前用户加入`docker`用户组：
+    ```
+    $ sudo gpasswd -a ${USER} docker
+    ```
+4. 启动：
+    ```
+    $ docker-compose up
+    ```
+    注意：Windows安装360安全卫士的同学，请先将其退出，不然安装过程中可能Docker创建账号过程可能被拦截，导致启动时文件共享失败；
+5. 访问在浏览器中访问：
 
+ - [http://localhost](http://localhost)
+ - [https://localhost](https://localhost)
+
+切换版本，安装扩展等，请修改**.env**文件，然后重新构建。
+
+6. 常用命令
+```bash
+#服务列表：redis|mysql|mongodb|nginx|php
+
+# 列出 Compose 文件中包含的镜像
+$ docker-compose images
+
+# 创建所有服务并启动
+$ docker-compose up
+$ docker-compose up -d          # 全部后台启动
+
+# 创建单个服务
+$ docker-compose up redis
+$ docker-compose up redis -d    # 后台启动
+
+# 如果容器已经创建
+# 启动
+$ docker-compose start redis
+# 停止
+$ docker-compose stop redis
+# 重启
+$ docker-compose restart redis
+
+# 重新构建
+$ docker-compose build redis
+# 删除
+$ docker-compose rm redis
+```
+更多命令请查看：
+- [docker-compose](https://docker_practice.gitee.io/compose/commands.html)
+- [docker](https://docker_practice.gitee.io/appendix/command/)
+开发者常用工具：
+- [常用](http://www.kaka996.com/web/dh/dev)
+
+
+## 3.命令行使用
+1. 编辑 ~/.bashrc（或 ~/.zshrc），并在行尾添加
+node () {
+    tty=tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --volume $PWD:/var/www/html:rw \
+        --workdir /var/www/html \
+        dnnmmp_node node "$@"
+}
+npm () {
+    tty=tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --volume $PWD:/var/www/html:rw \
+        --workdir /var/www/html \
+        dnnmmp_npm npm "$@"
+}
+php () {
+    tty=tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --volume $PWD:/var/www/html:rw \
+        --workdir /var/www/html \
+        dnnmmp_php npm "$@"
+}
+composer () {
+    tty=tty -s && tty=--tty
+    docker run \
+        $tty \
+        --interactive \
+        --rm \
+        --user $(id -u):$(id -g) \
+        --volume ~/dnmp/composer:/tmp \
+        --volume /etc/passwd:/etc/passwd:ro \
+        --volume /etc/group:/etc/group:ro \
+        --volume $(pwd):/app \
+        composer "$@"
+}
+2.必须执行：source ~/.bashrc 让修改的内容生效
+ps:如果提示命令不存在，请重新打开终端窗口。（因为旧的终端，并不会重新加载该文件）
 
 
 
