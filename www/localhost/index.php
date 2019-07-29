@@ -4,7 +4,7 @@ echo '<h1 style="text-align: center;">welcome dnnmmp！</h1>';
 echo '<h2>程序版本信息</h2>';
 
 echo '<ul>';
-echo '<li>Nodejs版本：1.15.7</li>';
+echo '<li>Nodejs版本：10.16.0</li>';
 echo '<li>Nginx版本：', $_SERVER['SERVER_SOFTWARE'], '</li>';
 echo '<li>MySQL服务器版本：', getMysqlVersion(), '</li>';
 echo '<li>Redis服务器版本：', getRedisVersion(), '</li>';
