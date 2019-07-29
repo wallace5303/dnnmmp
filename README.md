@@ -122,9 +122,9 @@ $ docker-compose rm redis
 
 ## 2.命令行使用
 1. docker安装的程序与直接安装在宿主机上的程序不同，如果需要使用命令行，有两种方法，
-- >（1）进入docker创建的容器中执行命令
+- >（1）方法一：进入docker创建的容器中执行命令
 
-- >（2）添加bash快捷命令，如下：
+- >（2）**方法二（推荐）**：添加bash快捷命令，如下：
 
 - >编辑 ```~/.bashrc（或 ~/.zshrc）```，并在行尾添加
 
@@ -198,7 +198,7 @@ $ docker-compose rm redis
     Copyright (c) 1997-2018 The PHP Group
     Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
         with Zend OPcache v7.2.19, Copyright (c) 1999-2018, by Zend Technologies
-        
+
     $ composer -v
     Composer version 1.8.6 2019-06-11 15:03:05
     ```
