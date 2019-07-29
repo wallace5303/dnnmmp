@@ -59,14 +59,17 @@
     ```bash
     # 如果不是`root`用户，那么将当前用户加入`docker`用户组
     $ sudo gpasswd -a ${USER} docker
+
     # 获取项目
     $ git clone git@github.com:wallace5303/dnnmmp.git
     ```
 3. 构建并启动：
     ```bash
     $ cd dnnmmp
+
     # 构建并运行（第一次安装建议使用此命令，方便查看打印的日志）
     $ docker-compose up
+
     # 后台运行
     $ docker-compose up -d
     ```
@@ -100,13 +103,16 @@ $ docker-compose up redis -d    # 后台启动
 # 如果容器已经创建
 # 启动
 $ docker-compose start redis
+
 # 停止
 $ docker-compose stop redis
+
 # 重启
 $ docker-compose restart redis
 
 # 重新构建
 $ docker-compose build redis
+
 # 删除
 $ docker-compose rm redis
 ```
@@ -183,13 +189,16 @@ $ docker-compose rm redis
     ```
     $ node -v
     v10.16.0
+
     $ npm -v
     6.9.0
+
     $ php -v
     PHP 7.2.19 (cli) (built: Jun 28 2019 03:58:08) ( NTS )
     Copyright (c) 1997-2018 The PHP Group
     Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
         with Zend OPcache v7.2.19, Copyright (c) 1999-2018, by Zend Technologies
+        
     $ composer -v
     Composer version 1.8.6 2019-06-11 15:03:05
     ```
