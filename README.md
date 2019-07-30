@@ -98,7 +98,7 @@ $ docker-compose up -d          # 全部后台启动
 
 # 创建单个服务
 $ docker-compose up redis
-$ docker-compose up redis -d    # 后台启动
+$ docker-compose up -d redis    # 后台启动
 
 # 如果容器已经创建
 # 启动
