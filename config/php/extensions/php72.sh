@@ -75,7 +75,7 @@ fi
 if [ -z "${EXTENSIONS##*,swoole,*}" ]; then
     echo "---------- Install swoole ----------"
     mkdir swoole \
-    && tar -xf swoole-4.2.1.tgz -C swoole --strip-components=1 \
+    && tar -xf swoole-4.3.6.tar.gz -C swoole --strip-components=1 \
     && ( cd swoole && phpize && ./configure --enable-openssl && make ${MC} && make install ) \
     && docker-php-ext-enable swoole
 fi
