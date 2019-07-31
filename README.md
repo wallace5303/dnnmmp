@@ -61,7 +61,7 @@
     $ sudo gpasswd -a ${USER} docker
 
     # 获取项目
-    $ git clone git@github.com:wallace5303/dnnmmp.git
+    $ git clone https://github.com/wallace5303/dnnmmp.git
     ```
 3. 构建并启动：
     ```bash
