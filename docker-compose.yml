@@ -6,7 +6,7 @@ services:
       args:
         GO_VERSION: ${GO_VERSION}
     volumes:
-      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${GO_PATH}:/go/:rw
     networks:
       - default
   node:
