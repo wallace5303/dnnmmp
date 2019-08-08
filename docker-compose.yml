@@ -1,5 +1,14 @@
 version: "3"
 services:
+  go:
+    build:
+      context: ./config/go/
+      args:
+        GO_VERSION: ${GO_VERSION}
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+    networks:
+      - default
   node:
     build:
       context: ./config/node/
