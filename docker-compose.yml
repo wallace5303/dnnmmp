@@ -57,6 +57,27 @@ services:
     networks:
       - default
 
+  php56:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP56_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php72.sh
+    ports:
+      - "${PHP56_HOST_PORT}:9001"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP56_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP56_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP56_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
   mysql:
     build:
       context: ./config/mysql/
