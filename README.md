@@ -1,18 +1,21 @@
-# 基于docker的nodejs、php开发环境
+# 基于docker的开发者集成环境
 [官方文档](http://blog.kaka996.com/)
+
+最近更新：docker可视化管理工具portainer
 
 ## Dnnmmp是什么？
 &emsp;&emsp;它是基于docker的开发环境，具有lnmp，lamp，mac系统下的XAMPP、MAMP一样的功能。但它是未来开发者的趋势，因为基于docker，使你本机电脑有云开发的效果。
 
 ## 它能做什么？
-&emsp;&emsp;目前集成了 nodejs、PHP、mysql、MongoDB、redis、nginx；PHP开发者、nodejs开发者、前端、运维可以直接使用。效率提高非常多。
+&emsp;&emsp;目前集成了 Node.js、PHP、Mysql、MongoDB、Redis、Nginx；PHP开发者、Node.js开发者、前端、后端、运维可以直接使用。效率提高非常多。
 
 ## 它有什么优势？
 &emsp;&emsp;一键安装所有程序，或者单独使用某个程序；方便版本切换，还有它是基于docker，一点也不影响本机环境，让程序员的整个生涯都不再需要为环境困扰。
 
 
+
 ## 特性
->1.主要针对**nodejs**开发人员、**php**开发人员，**运维**，**前端**
+>1.主要针对**nodejs**开发人员、**php**开发人员，**运维**，**前端**，**服务端**
 
 >2.支持**多版本**php，nodejs
 
@@ -27,6 +30,10 @@
 >7.程序是基于docker最新stable版，并从官方仓库下载
 
 >8.持续不断更新，支持交互、无人值守安装
+
+>9.支持系统版本：Linux、MacOs、Windows
+
+>10.docker可视化管理
 
 
 
