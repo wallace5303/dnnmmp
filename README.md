@@ -76,10 +76,17 @@
 │   ├── redis                           redis
 │       ├── Dockerfile
 │       ├── redis.conf                  redis配置文件
+│   ├── yapi                            yapi
+│       ├── Dockerfile
+│       ├── config.json                 yapi配置文件
+│       ├── entrypoint.sh               脚本
+│       ├── wait-for-it.sh              脚本
 ├── mongo                               mongodb数据目录
 ├── log                                 日志目录
 ├── mysql                               MySQL数据目录
+├── portainer_data                      portainer
 ├── docker-compose.yml                  Docker 服务配置
+├── docker-compose-manage.yml           管理服务
 ├── .env                                环境配置
 └── www                                 代码目录
 ```

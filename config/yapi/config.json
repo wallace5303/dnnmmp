@@ -1,0 +1,22 @@
+{
+   "port": "8005",
+   "adminAccount": "admin@admin.com",
+   "db": {
+     "servername": "dnnmmp_mongodb_1",
+     "DATABASE": "yapi",
+     "port": 27017,
+     "user": "root",
+     "pass": "123456",
+     "authSource": "admin"
+   },
+   "mail": {
+     "enable": true,
+     "host": "smtp.163.com",
+     "port": 465,
+     "from": "***@163.com",
+     "auth": {
+       "user": "***@163.com",
+       "pass": "*****"
+     }
+   }
+ }
