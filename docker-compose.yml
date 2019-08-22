@@ -137,10 +137,10 @@ services:
   yapi:
     build:
       context: ./config/yapi/
-    args:
-        YAPI_VERSION: ${YAPI_VERSION}
-        YAPI_HOME: ${YAPI_HOME}
-        YAPI_HOST_PORT: ${YAPI_HOST_PORT}
+      args:
+          YAPI_VERSION: ${YAPI_VERSION}
+          YAPI_HOME: ${YAPI_HOME}
+          YAPI_HOST_PORT: ${YAPI_HOST_PORT}
     restart: always
     ports:
       - "${YAPI_HOST_PORT}:${YAPI_HOST_PORT}"
