@@ -139,19 +139,18 @@ services:
       context: ./config/yapi/
       args:
           YAPI_VERSION: ${YAPI_VERSION}
-          YAPI_HOME: ${YAPI_HOME}
           YAPI_HOST_PORT: ${YAPI_HOST_PORT}
-    restart: always
     ports:
       - "${YAPI_HOST_PORT}:${YAPI_HOST_PORT}"
     volumes:
-      - ${YAPI_CONFIG_FILE}:/home/vendors/config.json:rw
       - ${YAPI_CONFIG_FILE}:/home/config.json:rw
+      - ${YAPI_CONFIG_FILE}:/home/vendors/config.json:rw
       - ${YAPI_LOG_DIR}:/home/log
     depends_on:
       - mongodb
     cap_add:
       - SYS_PTRACE
+    restart: always  
     networks:
       - default
 

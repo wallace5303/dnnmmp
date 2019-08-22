@@ -2,8 +2,7 @@
 cd ${VENDORS}
 if [ ! -e "init.lock" ]
 then
-	cd ${VENDORS}
-	yapi install -v ${YAPI_VERSION}
+	yapi install -v ${VERSION}
 	touch init.lock
 fi
 
