@@ -36,6 +36,27 @@ services:
     networks:
       - default
 
+  php73:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP73_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php73.sh
+    ports:
+      - "${PHP73_HOST_PORT}:9000"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
   php72:
     build:
       context: ./config/php/
@@ -51,6 +72,27 @@ services:
       - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP72_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP72_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
+  php71:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP71_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php71.sh
+    ports:
+      - "${PHP71_HOST_PORT}:9000"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP71_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP71_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP71_LOG_DIR}:/var/log/php
     restart: always
     cap_add:
       - SYS_PTRACE
