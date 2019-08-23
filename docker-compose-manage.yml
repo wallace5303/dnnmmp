@@ -3,12 +3,14 @@ services:
   portainer:
     image: portainer/portainer
     command: -H unix:///var/run/docker.sock
-    restart: always
     ports:
       - "${PORTAINER_HOST_PORT}:9000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PORTAINER_DATA_DIR}:/data
+    environment:
+      TZ: "$TZ"
+    restart: always  
 
 volumes:
   portainer_data:
