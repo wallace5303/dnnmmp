@@ -7,23 +7,21 @@ services:
         GO_VERSION: ${GO_VERSION}
     volumes:
       - ${GO_PATH}:/go/:rw
+    environment:
+      TZ: "$TZ"  
     networks:
       - default
   node:
-    build:
-      context: ./config/node/
-      args:
-        NODE_VERSION: ${NODE_VERSION}
+    image: node:${NODE_VERSION}
     volumes:
       - ${SOURCE_DIR}:/var/www/html/:rw
+    environment:
+      TZ: "$TZ"  
     networks:
       - default
 
   nginx:
-    build:
-      context: ./config/nginx/
-      args:
-        NGINX_VERSION: ${NGINX_VERSION}
+    image: nginx:${NGINX_VERSION}
     ports:
       - "${NGINX_HTTP_HOST_PORT}:80"
       - "${NGINX_HTTPS_HOST_PORT}:443"
@@ -33,6 +31,30 @@ services:
       - ${NGINX_CONF_FILE}:/etc/nginx/nginx.conf:ro
       - ${NGINX_LOG_DIR}:/var/log/nginx/:rw
     restart: always
+    environment:
+      TZ: "$TZ"    
+    networks:
+      - default
+
+  php73:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP73_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php73.sh
+        TZ: "$TZ"
+    ports:
+      - "${PHP73_HOST_PORT}:9000"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
     networks:
       - default
 
@@ -44,6 +66,7 @@ services:
         ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
         PHP_EXTENSIONS: ${PHP72_EXTENSIONS}
         MORE_EXTENSION_INSTALLER: php72.sh
+        TZ: "$TZ"
     ports:
       - "${PHP72_HOST_PORT}:9000"
     volumes:
@@ -57,6 +80,28 @@ services:
     networks:
       - default
 
+  php71:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP71_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php71.sh
+        TZ: "$TZ"
+    ports:
+      - "${PHP71_HOST_PORT}:9000"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP71_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP71_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP71_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
   php56:
     build:
       context: ./config/php/
@@ -64,7 +109,8 @@ services:
         PHP_VERSION: ${PHP56_VERSION}
         ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
         PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
-        MORE_EXTENSION_INSTALLER: php72.sh
+        MORE_EXTENSION_INSTALLER: php56.sh
+        TZ: "$TZ"
     ports:
       - "${PHP56_HOST_PORT}:9001"
     volumes:
@@ -79,43 +125,38 @@ services:
       - default
 
   mysql:
-    build:
-      context: ./config/mysql/
-      args:
-        MYSQL_VERSION: ${MYSQL_VERSION}
+    image: mysql:${MYSQL_VERSION}
     ports:
       - "${MYSQL_HOST_PORT}:3306"
     volumes:
       - ${MYSQL_CONF_FILE}:/etc/mysql/conf.d/mysql.cnf:ro
       - ${MYSQL_DATA_DIR}:/var/lib/mysql/:rw
     restart: always
-    networks:
-      - default
     environment:
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      TZ: "$TZ"    
+    networks:
+      - default
 
   redis:
-    build:
-      context: ./config/redis/
-      args:
-        REDIS_VERSION: ${REDIS_VERSION}
+    image: redis:${REDIS_VERSION}
     ports:
       - "${REDIS_HOST_PORT}:6379"
     volumes:
       - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
     restart: always
     entrypoint: ["redis-server", "/etc/redis.conf"]
+    environment:
+      TZ: "$TZ"    
     networks:
       - default
 
   mongodb:
-    build:
-      context: ./config/mongodb/
-      args:
-        MONGODB_VERSION: ${MONGODB_VERSION}
+    image: mongo:${MONGODB_VERSION}
     environment:
         MONGO_INITDB_ROOT_USERNAME: "${MONGODB_INITDB_ROOT_USERNAME}"
         MONGO_INITDB_ROOT_PASSWORD: "${MONGODB_INITDB_ROOT_PASSWORD}"
+        TZ: "$TZ"
     volumes:
       - ${MONGODB_DATA_DIR}:/data/db:rw
       - ${MONGODB_DATA_DIR}/mongo_key:/mongo:rw
@@ -150,9 +191,29 @@ services:
       - mongodb
     cap_add:
       - SYS_PTRACE
-    restart: always  
+    restart: always
+    environment:
+      TZ: "$TZ"    
     networks:
       - default
+
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_VERSION}
+    ports:
+      - "${RABBITMQ_HOST_PORT_1}:5672"
+      - "${RABBITMQ_HOST_PORT_2}:15672"
+    environment:
+       RABBITMQ_DEFAULT_USER: "${RABBITMQ_DEFAULT_USER}"
+       RABBITMQ_DEFAULT_PASS: "${RABBITMQ_DEFAULT_PASS}"
+       TZ: "$TZ"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"   
+    restart: always
+    networks:
+          - default
 
 networks:
   default:
