@@ -215,6 +215,42 @@ services:
     networks:
           - default
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "${PHPMYADMIN_HOST_PORT}:80"
+    volumes:
+          - /sessions      
+    networks:
+      - default
+    environment:
+      PMA_ARBITRARY: "${PMA_ARBITRARY}"
+      PMA_HOST: "${PMA_HOST}"
+      PMA_PORT: "${PMA_PORT}"
+      TZ: "$TZ"
+
+  phpredisadmin:
+    image: erikdubbelboer/phpredisadmin:latest
+    ports:
+      - "${REDISMYADMIN_HOST_PORT}:80"
+    networks:
+      - default
+    environment:
+      - REDIS_1_HOST=redis
+      - REDIS_1_PORT=6379
+      - TZ=$TZ          
+
+  adminmongo:
+    image: mrvautin/adminmongo
+    ports:
+      - "${ADMINMONGO_HOST_PORT}:1234"
+    environment:
+      - HOST=0.0.0.0
+      - DB_HOST=mongodb
+      - DB_PORT=27017
+    networks:
+      - default      
+
 networks:
   default:
 
