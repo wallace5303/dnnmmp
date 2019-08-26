@@ -193,7 +193,7 @@ services:
       - SYS_PTRACE
     restart: always
     environment:
-      TZ: "$TZ"    
+      TZ: "$TZ"
     networks:
       - default
 
@@ -220,7 +220,7 @@ services:
     ports:
       - "${PHPMYADMIN_HOST_PORT}:80"
     volumes:
-          - /sessions      
+          - /sessions
     networks:
       - default
     environment:
@@ -236,20 +236,25 @@ services:
     networks:
       - default
     environment:
-      - REDIS_1_HOST=redis
-      - REDIS_1_PORT=6379
-      - TZ=$TZ          
+      REDIS_1_HOST: "${REDIS_1_HOST}"
+      REDIS_1_PORT: "${REDIS_1_PORT}"
+      REDIS_1_NAME: "${REDIS_1_NAME}"
+      REDIS_1_AUTH: "${REDIS_1_AUTH}"
+      ADMIN_USER: "${ADMIN_USER}"
+      ADMIN_PASS: "${ADMIN_PASS}"
+      TZ: "$TZ"
 
   adminmongo:
     image: mrvautin/adminmongo
     ports:
       - "${ADMINMONGO_HOST_PORT}:1234"
     environment:
-      - HOST=0.0.0.0
-      - DB_HOST=mongodb
-      - DB_PORT=27017
+      HOST: "${ADMINMONGO_HOST}"
+      DB_HOST: "${ADMINMONGO_DB_HOST}"
+      DB_PORT: "${ADMINMONGO_DB_PORT}"
+      TZ: "$TZ"
     networks:
-      - default      
+      - default
 
 networks:
   default:
