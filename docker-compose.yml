@@ -256,6 +256,21 @@ services:
     networks:
       - default
 
+  gogs:
+    image: 'gogs/gogs:latest'
+    ports:
+      - "${GOGS_HOST_PORT_1}:3000"
+      - "${GOGS_HOST_PORT_2}:22"
+    volumes:
+      - ${GOGS_DATA_DIR}:/data
+    networks:
+      - default
+    environment:
+      TZ: "$TZ"
+    restart: always
+    depends_on:
+      - mysql
+
 networks:
   default:
 
