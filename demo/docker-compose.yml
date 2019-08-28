@@ -229,6 +229,48 @@ services:
       PMA_PORT: "${PMA_PORT}"
       TZ: "$TZ"
 
+  phpredisadmin:
+    image: erikdubbelboer/phpredisadmin:latest
+    ports:
+      - "${REDISMYADMIN_HOST_PORT}:80"
+    networks:
+      - default
+    environment:
+      REDIS_1_HOST: "${REDIS_1_HOST}"
+      REDIS_1_PORT: "${REDIS_1_PORT}"
+      REDIS_1_NAME: "${REDIS_1_NAME}"
+      REDIS_1_AUTH: "${REDIS_1_AUTH}"
+      ADMIN_USER: "${ADMIN_USER}"
+      ADMIN_PASS: "${ADMIN_PASS}"
+      TZ: "$TZ"
+
+  adminmongo:
+    image: mrvautin/adminmongo
+    ports:
+      - "${ADMINMONGO_HOST_PORT}:1234"
+    environment:
+      HOST: "${ADMINMONGO_HOST}"
+      DB_HOST: "${ADMINMONGO_DB_HOST}"
+      DB_PORT: "${ADMINMONGO_DB_PORT}"
+      TZ: "$TZ"
+    networks:
+      - default
+
+  gogs:
+    image: 'gogs/gogs:latest'
+    ports:
+      - "${GOGS_HOST_PORT_1}:3000"
+      - "${GOGS_HOST_PORT_2}:22"
+    volumes:
+      - ${GOGS_DATA_DIR}:/data
+    networks:
+      - default
+    environment:
+      TZ: "$TZ"
+    restart: always
+    depends_on:
+      - mysql
+
 networks:
   default:
 
