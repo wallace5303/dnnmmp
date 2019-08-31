@@ -3,11 +3,11 @@
 
 最近更新：
 
+2019-08-31 redis管理工具PhpRedisAdmin
+
 2019-08-28 mysql管理工具phpmyadmin
 
 2019-08-26 增加php7.1、php7.3、rabbitmq队列服务
-
-2019-08-22 超级好用的接口管理工具Yapi
 
 ## dnnmmp是什么？
 &emsp;&emsp;它是基于docker的开发者集成环境，包含丰富的软件，但它是未来开发者的趋势，因为基于docker，使你本机电脑有云开发的效果。
@@ -25,6 +25,7 @@
 8. Portainer ： docker管理工具
 9. rabbitmq ： 队列服务
 10. PhpMyAdmin ：mysql管理工具
+11. PhpRedisAdmin： redis管理工具
 
 ## 特性
 >1.使用对象：**前端**，**服务端**，**运维**
@@ -47,11 +48,6 @@
 
 ## 1.安装步骤
 - [官方文档](http://blog.kaka996.com/)
-
-#### 帮忙加个星吧：
-
-   [点击：GitHub](https://github.com/wallace5303/dnnmmp)
-
 
 ## 附录1：收集的程序员常用网站
 - [程序员常用网站](http://www.kaka996.com/web/dh/dev)
