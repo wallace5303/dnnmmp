@@ -36,6 +36,28 @@ services:
     networks:
       - default
 
+  php74:
+    build:
+      context: ./config/php/
+      args:
+        PHP_VERSION: ${PHP74_VERSION}
+        ALPINE_REPOSITORIES: ${ALPINE_REPOSITORIES}
+        PHP_EXTENSIONS: ${PHP74_EXTENSIONS}
+        MORE_EXTENSION_INSTALLER: php74.sh
+        TZ: "$TZ"
+    ports:
+      - "${PHP74_HOST_PORT}:9000"
+    volumes:
+      - ${SOURCE_DIR}:/var/www/html/:rw
+      - ${PHP74_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP74_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP74_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
   php73:
     build:
       context: ./config/php/
