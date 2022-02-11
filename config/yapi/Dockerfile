@@ -28,7 +28,7 @@ RUN apk update \
 RUN rm -rf node && \
     ret=`curl -s  https://api.ip.sb/geoip | grep China | wc -l` && \
     if [ $ret -ne 0 ]; then \
-        GIT_URL=${GIT_MIRROR_URL} && npm config set registry https://registry.npm.taobao.org; \
+        GIT_URL=${GIT_MIRROR_URL} && npm config set registry https://registry.npmmirror.com; \
     fi; \
     echo ${GIT_URL} && \
 	git clone --depth 1 ${GIT_URL} vendors && \
